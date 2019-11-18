@@ -242,9 +242,9 @@ export default class Dropdown extends PureComponent {
 
   rippleInsets() {
     const { rippleInsets } = this.props;
-    const { top = 16, right = 0, bottom = -8, left = 0 } = rippleInsets || {};
+    const { top = 16, right = 0, left = 0 } = rippleInsets || {};
 
-    return { top, right, bottom, left };
+    return { top, right, left };
   }
 
   resetScrollOffset() {
@@ -310,11 +310,11 @@ export default class Dropdown extends PureComponent {
       rippleSequential,
     } = this.props;
 
-    const { bottom, ...insets } = this.rippleInsets();
+    const { ...insets } = this.rippleInsets();
     const style = {
       ...insets,
 
-      height: this.itemSize() - bottom,
+      height: this.itemSize(),
       position: "absolute",
     };
 
@@ -471,7 +471,7 @@ export default class Dropdown extends PureComponent {
     const itemCount = data.length;
     const visibleItemCount = this.visibleItemCount();
     const itemSize = this.itemSize();
-    const height = 2 * itemPadding + itemSize * visibleItemCount;
+    const height = itemPadding + itemSize * visibleItemCount;
     const translateY = -itemPadding;
 
     const pickerStyle = {
@@ -545,7 +545,6 @@ Dropdown.propTypes = {
   rippleInsets: PropTypes.shape({
     top: PropTypes.number,
     right: PropTypes.number,
-    bottom: PropTypes.number,
     left: PropTypes.number,
   }),
 
@@ -589,7 +588,7 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   noDataText: locales.components.Autocomplete.noData,
-  hitSlop: { top: 6, right: 4, bottom: 6, left: 4 },
+  hitSlop: { top: 6, right: 4, left: 4 },
   disabled: false,
   data: [],
   valueExtractor: ({ value } = {}) => value,
@@ -607,7 +606,6 @@ Dropdown.defaultProps = {
   rippleInsets: {
     top: 16,
     right: 0,
-    bottom: -8,
     left: 0,
   },
   rippleOpacity: 0.54,
